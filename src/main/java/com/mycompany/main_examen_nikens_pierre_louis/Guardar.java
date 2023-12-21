@@ -4,7 +4,7 @@ package com.mycompany.main_examen_nikens_pierre_louis;
 
 
 // importaciones
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -22,15 +22,15 @@ public class Guardar extends JFrame {
     public Guardar() {
         // Inicializo los componetes y el layout
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(800, 600);
-        setLayout(new GridLayout(0, 2, 10, 10)); // 0 rows, 2 columns, horizontal and vertical gaps
+        setSize(1000, 600);
+        setLayout(new GridLayout(0, 2, 3, 0)); // 0 rows, 2 columns, horizontal and vertical gaps
 
         // Instancio los componentes de la interfaz de usuario
-        txtIdMecanico = new JTextField(10);
-        txtNombre = new JTextField(10);
-        txtEdad = new JTextField(10);
-        txtDomicilio = new JTextField(10);
-        txtSueldoBase = new JTextField(10);
+        txtIdMecanico = new JTextField();
+        txtNombre = new JTextField();
+        txtEdad = new JTextField();
+        txtDomicilio = new JTextField();
+        txtSueldoBase = new JTextField();
         txtGratificacion = new JTextField(10);
         lblSueldoTotal = new JLabel("0");
         
@@ -40,8 +40,28 @@ public class Guardar extends JFrame {
         
         // creo los buttons
         btnGuardar = new JButton("Guardar");
+        btnGuardar.setBounds(4500, 327, 110, 25);
+        btnGuardar.setBackground(new Color(79, 129, 189)); // Color de fondo del boton
+        btnGuardar.setForeground(Color.WHITE); //  Color de texto del boton
+        
+        
         btnCorregir = new JButton("Corregir");
+        btnCorregir.setBounds(20,10,30,14);
+        btnCorregir.setBackground(new Color(79, 129, 189)); // Color de fondo del boton
+        btnCorregir.setForeground(Color.WHITE); // Color de texto del boton
+        
+        
+        
         btnVolver = new JButton("Volver");
+         btnVolver.setBounds(3000, 327, 110, 25);
+         btnVolver.setBackground(new Color(79, 129, 189)); // Color de fondo del boton
+         btnVolver.setForeground(Color.WHITE); //  Color de texto del boton
+        
+        
+        
+        
+        
+        
         
         // Establecer colores de los botones si es necesario
         btnGuardar.setBackground(Color.GREEN);
@@ -85,7 +105,7 @@ public class Guardar extends JFrame {
         panelBotones.add(btnVolver);
         add(panelBotones);
 
-        // Pack para hacerlo visible visible
+        // Pack para hacerlo visible 
         pack();
         setLocationRelativeTo(null); // centraliza la ventana
         setVisible(true);

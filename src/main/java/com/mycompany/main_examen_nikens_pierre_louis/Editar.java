@@ -2,12 +2,8 @@
 package com.mycompany.main_examen_nikens_pierre_louis;
 
 
-
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Editar extends JFrame {
@@ -16,48 +12,76 @@ public class Editar extends JFrame {
     private JButton btnEditar, btnCorregir, btnVolver;
     private static ArrayList<Mecanico> listaMecanicos; // Referencia a la lista de mecánicos
     private Mecanico mecanicoActual; // Mecánico actualmente seleccionado para editar
+    private int indiceMecanico; // Índice del mecánico en la lista
 
     public Editar(ArrayList<Mecanico> listaMecanicos, int indiceMecanico) {
-        cargarDatosMecanico();
+        this.listaMecanicos = listaMecanicos;
+        this.indiceMecanico = indiceMecanico;
+
         mecanicoActual = listaMecanicos.get(indiceMecanico); // Obtiene el mecánico seleccionado
 
         setTitle("Editar un Mecanico");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 600);
         setLayout(new GridLayout(0, 2, 10, 10));
 
-        // Crear e inicializar los campos de texto y comboboxes aquí...
+        // Inicializar componentes
+        txtIdMecanico = new JTextField();
+        txtNombre = new JTextField();
+        txtEdad = new JTextField();
+        txtDomicilio = new JTextField();
+        txtSueldoBase = new JTextField();
+        txtGratificacion = new JTextField(10);
+        txtSueldoTotal = new JTextField();
 
-        // Botón de editar
+        cmbTitulo = new JComboBox<>(new String[]{"Ingeniero Mecanico", "Tecnico Mecanico"});
+        cmbEspecialidad = new JComboBox<>(new String[]{"Electromecanica", "Mecanica General", "Mecanica Avanzada"});
+
         btnEditar = new JButton("Editar");
-        btnEditar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Recoge y valida los datos ingresados por el usuario
-                // Actualiza el objeto mecanicoActual y la lista de mecánicos
-            }
-        });
-
-        // Botón de corregir
         btnCorregir = new JButton("Corregir");
-        btnCorregir.addActionListener(e -> {
-            // Restablece los campos de entrada a los valores del mecánicoActual
-        });
-
-        // Botón de volver
         btnVolver = new JButton("Volver");
+
+        // Agregar componentes al layout
+        add(new JLabel("ID Mecanico:"));
+        add(txtIdMecanico);
+        add(new JLabel("Nombre:"));
+        add(txtNombre);
+        add(new JLabel("Edad:"));
+        add(txtEdad);
+        add(new JLabel("Domicilio:"));
+        add(txtDomicilio);
+        add(new JLabel("Titulo:"));
+        add(cmbTitulo);
+        add(new JLabel("Especialidad:"));
+        add(cmbEspecialidad);
+        add(new JLabel("Sueldo Base:"));
+        add(txtSueldoBase);
+        add(new JLabel("Gratificación Título:"));
+        add(txtGratificacion);
+        add(new JLabel("Sueldo Total:"));
+        add(txtSueldoTotal);
+
+        // Agregar acciones a los botones
+        btnEditar.addActionListener(e -> actualizarMecanico());
+        btnCorregir.addActionListener(e -> cargarDatosMecanico());
         btnVolver.addActionListener(e -> dispose());
 
-        // Añade los componentes al JFrame aquí...
+        // Agregar botones al layout
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(btnEditar);
+        panelBotones.add(btnCorregir);
+        panelBotones.add(btnVolver);
+        add(panelBotones);
+
+        // Cargar datos del mecánico actual
+        cargarDatosMecanico();
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    // Métodos para cargar los datos del mecánico seleccionado y actualizar la lista...
-    
     // Método para cargar los datos del mecánico seleccionado en los campos de texto y comboboxes
     private void cargarDatosMecanico() {
-      
         txtIdMecanico.setText(String.valueOf(mecanicoActual.getIdMecanico()));
         txtNombre.setText(mecanicoActual.getNombre());
         txtEdad.setText(String.valueOf(mecanicoActual.getEdad()));
@@ -91,9 +115,9 @@ public class Editar extends JFrame {
             mecanicoActual.setSueldoBase(sueldoBase);
             mecanicoActual.setGratificacionTitulo(gratificacionTitulo);
             mecanicoActual.calcularSueldoTotal(); // Recalcula el sueldo total
-           
+
             // Reemplaza el mecánico en la lista con el mecánico actualizado
-            listaMecanicos.set(listaMecanicos.indexOf(mecanicoActual), mecanicoActual);
+            listaMecanicos.set(indiceMecanico, mecanicoActual);
 
             JOptionPane.showMessageDialog(this, "Mecánico actualizado exitosamente.");
         } catch (NumberFormatException ex) {
@@ -101,8 +125,10 @@ public class Editar extends JFrame {
         }
     }
 
-    
  
+    
+    
+    
     
 }
 
